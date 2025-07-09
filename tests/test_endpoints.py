@@ -1,5 +1,3 @@
-# Não é necessário importar o TestClient aqui, pois ele vem da fixture 'client'
-
 def test_criar_time(client):
     """
     Testa a criação de um novo time com sucesso.
@@ -9,7 +7,7 @@ def test_criar_time(client):
         json={"nome": "Unidos do Teste FC", "estadio": "Estádio da Memória", "presidente": "Pytest"},
     )
     data = response.json()
-    assert response.status_code == 200  # FastAPI retorna 200 por padrão em POST com response_model
+    assert response.status_code == 200
     assert data["nome"] == "Unidos do Teste FC"
     assert "id" in data
 
@@ -43,12 +41,10 @@ def test_listar_partidas_apos_sorteio(client):
     """
     Testa se a lista de partidas é retornada corretamente após o sorteio.
     """
-    # Setup: Criar times e sortear
     client.post("/times/", json={"nome": "Time C", "estadio": "C", "presidente": "C"})
     client.post("/times/", json={"nome": "Time D", "estadio": "D", "presidente": "D"})
     client.post("/sorteio/")
 
-    # Teste
     response = client.get("/partidas/")
     data = response.json()
     assert response.status_code == 200

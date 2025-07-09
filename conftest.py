@@ -2,7 +2,6 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
 import psycopg2
 from app.main import app
 from app.database import Base, get_db
@@ -14,19 +13,16 @@ DB_PORT = "5432"
 TEST_DB_NAME = "test_futebol_db"
 
 ADMIN_DB_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/postgres"
+
 # URL para o banco de dados de teste que será criado e usado
 TEST_DB_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{TEST_DB_NAME}"
 
 def create_test_database_if_not_exists():
-    """Conecta-se ao BD admin 'postgres' e cria o banco de dados de teste se ele não existir."""
     conn = None
     try:
-        # Conecta-se ao banco de dados 'postgres' que sempre existe
         conn = psycopg2.connect(ADMIN_DB_URL)
-        conn.autocommit = True  # CREATE DATABASE não pode ser executado em uma transação
+        conn.autocommit = True
         cursor = conn.cursor()
-
-        # Verifica se o banco de dados de teste já existe
         cursor.execute(f"SELECT 1 FROM pg_database WHERE datname = '{TEST_DB_NAME}'")
         exists = cursor.fetchone()
 
@@ -40,7 +36,6 @@ def create_test_database_if_not_exists():
         cursor.close()
     except Exception as e:
         print(f"Ocorreu um erro ao tentar criar o banco de dados: {e}")
-        # Se não conseguir conectar/criar, o melhor é falhar os testes
         pytest.fail(f"Não foi possível configurar o banco de dados de teste: {e}")
     finally:
         if conn:

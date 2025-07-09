@@ -1,6 +1,5 @@
-# app/schemas.py
 import uuid
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing import Optional
 
 class TimeBase(BaseModel):
@@ -14,7 +13,7 @@ class TimeCreate(TimeBase):
 class Time(TimeBase):
     id: uuid.UUID
     image_key: Optional[str] = None
-    
+
     class Config:
         from_attributes = True
 
@@ -32,7 +31,7 @@ class Partida(BaseModel):
 
 class EventoPartida(BaseModel):
     partida_id: str
-    tipo_evento: str # ex: "GOL", "CARTAO_AMARELO", "SUBSTITUICAO"
+    tipo_evento: str # ex: "GOL", "CARTAO_AMARELO", "SUBSTITUICAO"(adicionar limitacao)
     minuto: int
     descricao: str
     jogador: Optional[str] = None

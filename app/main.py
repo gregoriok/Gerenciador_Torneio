@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 load_dotenv()
-from fastapi import FastAPI, Depends, HTTPException, WebSocket, WebSocketDisconnect
-from app import crud, models, schemas
-from app.database import SessionLocal, engine, get_db
+from fastapi import FastAPI
+from app import models
+from app.database import engine
 from app.routers import times, sorteio, partida
 
 

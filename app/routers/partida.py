@@ -1,10 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Form, FastAPI, Response, WebSocket, \
-    WebSocketDisconnect
+from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
 from .. import schemas
 from app.websocket import manager, salvar_evento
 
 router = APIRouter()
-
 
 @router.websocket("/ws/partida/{partida_id}")
 async def websocket_endpoint(websocket: WebSocket, partida_id: str):

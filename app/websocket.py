@@ -1,4 +1,3 @@
-# app/websocket.py
 from fastapi import WebSocket
 from typing import Dict, List
 from . import schemas
@@ -6,7 +5,6 @@ from .database import mongodb
 
 class ConnectionManager:
     def __init__(self):
-        # Mapeia partida_id para uma lista de conexões ativas
         self.active_connections: Dict[str, List[WebSocket]] = {}
 
     async def connect(self, websocket: WebSocket, partida_id: str):

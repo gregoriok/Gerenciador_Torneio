@@ -1,4 +1,3 @@
-# app/crud.py
 from sqlalchemy.orm import Session, joinedload
 import random
 from . import models, schemas
@@ -26,7 +25,6 @@ def update_time_image_key(db: Session, time_id: str, image_key: str) -> models.T
     return db_time
 
 def sortear_partidas(db: Session):
-
     partidas_existentes = db.query(models.Partida).first()
     if partidas_existentes:
         raise ValueError(

@@ -1,10 +1,8 @@
-# app/models.py
 import uuid
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 from .database import Base
-
 
 class Time(Base):
     __tablename__ = "times"
