@@ -63,12 +63,13 @@ Uma conta na AWS com credenciais IAM configuradas.
 1. Clonando o Repositório
 ```bash
 
-git clone [URL_DO_SEU_REPOSITORIO]
-cd [NOME_DA_PASTA_DO_PROJETO]
+git clone https://github.com/gregoriok/Gerenciador_Torneio.git
+cd Pasta_Do_Projeto
+```
 2. Configurando o Ambiente
 a. Crie o ambiente virtual:
 
-
+```bash
 python -m venv venv
 source venv/bin/activate  # No Windows: venv\Scripts\activate
 ```
@@ -85,7 +86,7 @@ Crie um arquivo chamado .env na raiz do projeto, copiando o modelo .env.example 
 # .env
 AWS_ACCESS_KEY_ID=SUA_ACCESS_KEY_AQUI
 AWS_SECRET_ACCESS_KEY=SUA_SECRET_KEY_AQUI
-AWS_REGION=sua-regiao-aws # ex: sa-east-1
+AWS_REGION=sua-regiao-aws
 S3_BUCKET=NOME-DO-SEU-BUCKET-S3
 LAMBDA_FUNCTION_NAME=nome-da-sua-funcao-lambda
 ```
